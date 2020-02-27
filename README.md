@@ -1,0 +1,2 @@
+# CubeMagique
+InitCube Sol Com
