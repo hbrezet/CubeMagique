@@ -32,6 +32,10 @@ int save() {
 
         cout << "Sauvegarde en cours..." << endl;
         sleep(5);
+        
+        XMLPrinter printer();
+        doc.Print();
+        
     } else if (sauvegarde == "non" | sauvegarde == "Non" | sauvegarde == "n") {
         cout << "" << endl;
     }
@@ -46,6 +50,8 @@ int save() {
 
 int main() {
 
+    system("clear");
+    
     XMLDocument doc;
 
     cout << titre << endl;
@@ -64,23 +70,7 @@ int main() {
         doc.LoadFile(nomFichier.c_str());
 
         cout << " " << endl;
-
-        if (nomFichier == "hello.xml") {
-            
-            system("clear");
-
-            string Hello = doc.FirstChildElement("Test")->FirstChildElement("Hello")->FirstAttribute()->Value();
-            string Hello2 = doc.FirstChildElement("Test")->FirstChildElement("Hello")->GetText();
-
-            string World = doc.FirstChildElement("Test")->FirstChildElement("World")->FirstAttribute()->Value();
-            string World2 = doc.FirstChildElement("Test")->FirstChildElement("World")->GetText();
-
-            cout << Hello << endl << Hello2 << endl << World << endl << World2 << endl;
-            
-            cout << "" << endl;
-            
-
-        } else {
+ 
             doc.LoadFile(nomFichier.c_str());
 
             system("clear");
@@ -123,9 +113,6 @@ int main() {
 
             cout << " " << endl;
 
-
-        }
-
         save();
 
     } else if (cin.fail()) {
@@ -137,8 +124,7 @@ int main() {
     
     cout << "" << endl;
     
-    XMLPrinter printer();
-    doc.Print();
+    
     return 0;
 }
 
