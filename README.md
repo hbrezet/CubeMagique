@@ -1,4 +1,4 @@
 # CubeMagique
 InitCube Sol Com
 
-Programme XML XTractor visant à extraire des données d'un fichier XML.
+Programme XML X-Tractor visant à extraire des données d'un fichier XML.

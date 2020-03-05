@@ -4,6 +4,8 @@
 #include <iostream>
 #include "tinyxml2.h"
 #include <unistd.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 using namespace std;
 using namespace tinyxml2;
@@ -13,10 +15,6 @@ string titre = "* XML X-TRACTOR * \n";
 int save() {
     XMLDocument doc;
     string saveFile;
-    string saved;
-
-    //save += saveFile;
-    //saved += ".xml";
 
     string sauvegarde;
     cout << "Sauvegarder le document ? Oui/Non" << endl;
@@ -28,17 +26,15 @@ int save() {
         cout << "Veuillez rentrer un nom pour la sauvegarde" << endl;
         cin >> saveFile;
 
-
+        system("clear");
 
         doc.SaveFile(saveFile.c_str(), false);
 
         cout << "Sauvegarde en cours..." << endl;
         sleep(5);
-    }
-    else if (sauvegarde == "non" | sauvegarde == "Non" | sauvegarde == "n") {
+    } else if (sauvegarde == "non" | sauvegarde == "Non" | sauvegarde == "n") {
         cout << "" << endl;
     }
-
     else {
         system("clear");
         cout << "Merci de rentrer une réponse valide." << endl;
@@ -52,8 +48,6 @@ int main() {
 
     XMLDocument doc;
 
-
-
     cout << titre << endl;
 
     cout << "Veuillez renseigner le nom du fichier à extraire." << endl;
@@ -65,13 +59,15 @@ int main() {
     nomFichier += fichier;
     nomFichier += ".xml";
 
-    if (!cin.fail()) { //faire en sorte que si l'input est invalide ça remette au main en boucle
+    if (!(cin.fail())) { //faire en sorte que si l'input est invalide ça remette au main en boucle
 
         doc.LoadFile(nomFichier.c_str());
 
         cout << " " << endl;
 
         if (nomFichier == "hello.xml") {
+            
+            system("clear");
 
             string Hello = doc.FirstChildElement("Test")->FirstChildElement("Hello")->FirstAttribute()->Value();
             string Hello2 = doc.FirstChildElement("Test")->FirstChildElement("Hello")->GetText();
@@ -80,9 +76,11 @@ int main() {
             string World2 = doc.FirstChildElement("Test")->FirstChildElement("World")->GetText();
 
             cout << Hello << endl << Hello2 << endl << World << endl << World2 << endl;
+            
+            cout << "" << endl;
+            
 
-        }
-        else {
+        } else {
             doc.LoadFile(nomFichier.c_str());
 
             system("clear");
@@ -130,13 +128,17 @@ int main() {
 
         save();
 
-    }
-    else if (cin.fail()) {
+    } else if (cin.fail()) {
         main();
     }
 
     system("clear");
     cout << "Merci d'avoir utilisé XML X-TRACTOR !" << endl;
+    
+    cout << "" << endl;
+    
+    XMLPrinter printer();
+    doc.Print();
     return 0;
 }
 
