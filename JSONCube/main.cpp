@@ -1,25 +1,32 @@
-#include <cstdlib>
-#include <jsonLib/value.h>
-#include <fstream>
+#include "json.hpp"
+#include "cstdlib"
 #include <iostream>
+#include <fstream>
+#include <string.h>
 
 using namespace std;
+using json = nlohmann::json;
 
-int main(int argc, char** argv) {
+int main(){
+
+	ifstream streamed("trame.json");
+	json fichier;
+
+	streamed >> fichier;
+
+	cout << fichier << endl;
+
+	string typeCMD = fichier["CMD"]["TYPE_CMD"];
+	string typeINSTRU = fichier["CMD"]["INSTRUMENT"];
+	string typeMESURE = fichier["CMD"]["TYPE_MEASURE"];
+	string date = fichier["CMD"]["DATE"];
+
+	cout << "La commande est de type : " << typeCMD << endl;
+	cout << "L'instrument est de type : " << typeINSTRU << endl;
+	cout << "Le type de mesure est de type : " << typeMESURE << endl;
+	cout << "La date est le : " << date << endl;
 
 
-std::ifstream people_file("people.json", std::ifstream::binary);
-people_file >> people;
+return 0;
 
-cout<<people; //This will print the entire json object.
-
-//The following lines will let you access the indexed objects.
-cout<<people["Anna"]; //Prints the value for "Anna"
-cout<<people["ben"]; //Prints the value for "Ben"
-cout<<people["Anna"]["profession"]; //Prints the value corresponding to "profession" in the json for "Anna"
-
-cout<<people["profession"]; //NULL! There is no element with key "profession". Hence a new empty element will be created.
-    
-    return 0;
 }
-
