@@ -3,30 +3,34 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
+#include "Commande.cpp"
+#include "Commande.h"
 
 using namespace std;
 using json = nlohmann::json;
 
-int main(){
+int main() {
+	
+	char* chaineCaractere = "{"CMD":{"TYPE_CMD":"MEASURE","INSTRUMENT":"CAMERA","TYPE_MEASURE":"IMAGE","DATE":"2020-05-13 15:35:00"}}";
+	
 
-	ifstream streamed("trame.json");
-	json fichier;
+	Commande * maCommande = new Commande(chaineCaractere);
+  	maCommande -> extraireType();
 
-	streamed >> fichier;
+	
 
-	cout << fichier << endl;
-
-	string typeCMD = fichier["CMD"]["TYPE_CMD"];
-	string typeINSTRU = fichier["CMD"]["INSTRUMENT"];
-	string typeMESURE = fichier["CMD"]["TYPE_MEASURE"];
-	string date = fichier["CMD"]["DATE"];
-
+	char* typeCMD = chaineCaractere["CMD"]["TYPE_CMD"];
+	char* typeINSTRU = chaineCaractere["CMD"]["INSTRUMENT"];
+	//char* typeMESURE = chaineCaractere["CMD"]["TYPE_MEASURE"];
+	char* date = chaineCaractere["CMD"]["DATE"];
+	
 	cout << "La commande est de type : " << typeCMD << endl;
 	cout << "L'instrument est de type : " << typeINSTRU << endl;
-	cout << "Le type de mesure est de type : " << typeMESURE << endl;
+	//cout << "Le type de mesure est de type : " << typeMESURE << endl;
+	
 	cout << "La date est le : " << date << endl;
+	
+	
 
-
-return 0;
-
+	return 0;
 }
